@@ -109,6 +109,21 @@ namespace ChatApp.Controllers
             return View(table);
         }
 
+        [HttpPost, ActionName("DeleteAll")]
+        public ActionResult DeleteAll()
+        {
+            try
+            {
+                db.Table.RemoveRange(db.Table);
+                db.SaveChanges();
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
+
         // POST: Tables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
